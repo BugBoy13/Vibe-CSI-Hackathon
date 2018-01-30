@@ -29,9 +29,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
+
+    @Bind(R.id.editText) EditText editText;
 
     /** Called when the activity is first created. */
     //Loopback l = null;
@@ -50,25 +50,22 @@ public class MainActivity extends AppCompatActivity {
     String mCreateDataType = null;
     String mCreateDataExtraText = null;
 
-    TextView textButtonListen;
-
-
-    @Bind(R.id.EditTextToPlay) EditText editText;
+    TextView setTextListen ;
+    TextView aisehi;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        textStatus = (TextView) findViewById(R.id.textViewStatus);
+        textListen = (TextView) findViewById(R.id.textViewMessage);
 
-        textStatus =  findViewById(R.id.textViewStatus);
-        textListen =  findViewById(R.id.textViewMessage);
-
-        CardView t =  findViewById(R.id.ButtonPlay);
+        CardView t =  findViewById(R.id.cardPlay);
         t.setOnClickListener(mPlayListener);
 
-        t = findViewById(R.id.ButtonListen);
+        t = findViewById(R.id.cardListen);
         t.setOnClickListener(mListenListener);
 
         final Intent intent = getIntent();
@@ -103,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     {
         public void onClick(View v)
         {
-            EditText e =  findViewById(R.id.EditTextToPlay);
+            EditText e = (EditText) findViewById(R.id.editText);
             String s = e.getText().toString();
 
 
@@ -120,27 +117,31 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v)
         {
 
-            textButtonListen = findViewById(R.id.listeningTextView);
 
             if( microphoneListener == null )
             {
+                setTextListen = (TextView) findViewById(R.id.textListenCard);
 
                 listen();
-                textButtonListen.setText("Stop listening");
+                setTextListen.setText("Stop listening");
             }
             else
             {
-
+                setTextListen = (TextView) findViewById(R.id.textListenCard);
 
                 stopListening();
-                textButtonListen.setText("Listen");
+                setTextListen.setText("Listen");
             }
 
         }
     };
+
+
+
+
     /* (non-Javadoc)
-	 * @see android.app.Activity#onPause()
-	 */
+     * @see android.app.Activity#onPause()
+     */
     @Override
     protected void onPause() {
 
@@ -158,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
         stopListening();
     }
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onResume()
-	 */
+    /* (non-Javadoc)
+     * @see android.app.Activity#onResume()
+     */
     @Override
     protected void onResume()
     {
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         if( sent != null )
         {
-            EditText e = (EditText) findViewById(R.id.EditTextToPlay);
+            EditText e = (EditText) findViewById(R.id.editText);
             e.setText(sent);
         }
 
@@ -220,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if( microphoneListener != null )
         {
+            Log.v("Main", "output decoded msg is -- >>> "+ decodedStream.toString());
             textListen.setText(decodedStream.toString());
             textStatus.setText(sDecoder.getStatusString());
         }
@@ -325,4 +327,11 @@ public class MainActivity extends AppCompatActivity {
 
         return buffer;
     }
+
 }
+
+
+
+
+
+
