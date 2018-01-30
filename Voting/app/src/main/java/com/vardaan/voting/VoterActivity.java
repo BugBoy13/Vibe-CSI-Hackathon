@@ -31,7 +31,10 @@ public class VoterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
+
+                perform("0");
+
+                /*AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
                 alertDialog.setTitle("Option A Selected");
                 alertDialog.setMessage("You will be redirected on dismiss");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
@@ -42,7 +45,7 @@ public class VoterActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                alertDialog.show();
+                alertDialog.show();*/
             }
         });
 
@@ -50,7 +53,7 @@ public class VoterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
+                /*AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
                 alertDialog.setTitle("Option B Selected");
                 alertDialog.setMessage("You will be redirected on dismiss");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
@@ -61,8 +64,8 @@ public class VoterActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                alertDialog.show();
-
+                alertDialog.show();*/
+                perform("1");
             }
         });
 
@@ -70,7 +73,7 @@ public class VoterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
+                /*AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
                 alertDialog.setTitle("Option C Selected");
                 alertDialog.setMessage("You will be redirected on dismiss");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
@@ -81,8 +84,8 @@ public class VoterActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                alertDialog.show();
-
+                alertDialog.show();*/
+                perform("2");
             }
         });
 
@@ -90,7 +93,7 @@ public class VoterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
+                /*AlertDialog alertDialog = new AlertDialog.Builder(VoterActivity.this).create();
                 alertDialog.setTitle("Option D Selected");
                 alertDialog.setMessage("You will be redirected on dismiss");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
@@ -101,9 +104,28 @@ public class VoterActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                alertDialog.show();
+                alertDialog.show();*/
+                perform("3");
 
             }
         });
     }
+
+    private void perform( String input )
+    {
+
+        try
+        {
+
+            //try to play the file
+            System.out.println("Performing " + input);
+            AudioUtils.performArray(input.getBytes());
+        }
+
+        catch (Exception e){
+            System.out.println("Could not encode " + input + " because of " + e);
+        }
+
+    }
+
 }
