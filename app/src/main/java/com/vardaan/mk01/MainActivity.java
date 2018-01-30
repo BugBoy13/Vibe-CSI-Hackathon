@@ -28,6 +28,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     /** Called when the activity is first created. */
@@ -47,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
     String mCreateDataType = null;
     String mCreateDataExtraText = null;
 
+    TextView textButtonListen;
 
 
-    @Bind(R.id.editText) EditText editText;
+    @Bind(R.id.EditTextToPlay) EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        textStatus = (TextView) findViewById(R.id.textViewStatus);
-        textListen = (TextView) findViewById(R.id.textViewMessage);
+        textStatus =  findViewById(R.id.textViewStatus);
+        textListen =  findViewById(R.id.textViewMessage);
 
         CardView t =  findViewById(R.id.ButtonPlay);
         t.setOnClickListener(mPlayListener);
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     {
         public void onClick(View v)
         {
-            EditText e = (EditText) findViewById(R.id.EditTextToPlay);
+            EditText e =  findViewById(R.id.EditTextToPlay);
             String s = e.getText().toString();
 
 
@@ -116,19 +120,20 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v)
         {
 
+            textButtonListen = findViewById(R.id.listeningTextView);
 
             if( microphoneListener == null )
             {
 
                 listen();
-                ((Button)v).setText("Stop listening");
+                textButtonListen.setText("Stop listening");
             }
             else
             {
 
 
                 stopListening();
-                ((Button)v).setText("Listen");
+                textButtonListen.setText("Listen");
             }
 
         }
