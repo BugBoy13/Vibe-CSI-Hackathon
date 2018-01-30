@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vardaan.voting.VoterActivity">
+
+    <TextView
+        android:id="@+id/chooseOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Option"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:textSize="28sp" />
+
+    <GridLayout
+        android:layout_below="@id/chooseOption"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:rowCount="2"
+        android:columnCount="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/optionAButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option A"/>
+
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/optionBButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option B"/>
+
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/optionCButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option C"/>
+
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/optionDButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option D"/>
+    </GridLayout>
+
+</RelativeLayout>
