@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
 
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:label="Message"
+        <activity android:name=".MessageMainActivity" android:label="Message"
             android:theme="@style/Base.Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

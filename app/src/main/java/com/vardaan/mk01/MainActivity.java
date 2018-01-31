@@ -166,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
 
             else if (e2.getX() < e1.getX()){
 
+                startActivity(new Intent(MainActivity.this, MessageMainActivity.class));
+                finish();
+
             }
 
             return true;

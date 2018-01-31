@@ -27,7 +27,9 @@
         </activity>
         <activity
             android:name=".VotingMainActivity"
-            android:label="Voting"></activity>
+            android:label="Voting">
+
+        </activity>
         <activity android:name=".ReceiverActivity" />
         <activity android:name=".VoterActivity" />
         <activity android:name=".LogoActivity">
@@ -37,6 +39,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+        </activity>
+        <activity android:name=".MessageMainActivity" android:label="Message"
+            android:theme="@style/Base.Theme.AppCompat.Light">
         </activity>
     </application>
 

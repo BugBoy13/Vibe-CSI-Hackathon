@@ -1,14 +1,17 @@
-package com.example.android.message;
+package com.vardaan.mk01;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,13 +23,15 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MessageMainActivity extends AppCompatActivity {
     Button btn;
     EditText editText,editText2;
     MicrophoneListener microphoneListener = null;
     StreamDecoder sDecoder = null;
     ByteArrayOutputStream decodedStream = new ByteArrayOutputStream();
     Timer refreshTimer = null;
+
+    GestureDetectorCompat gesterObject;
 
     int counter=0;
 
@@ -36,13 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
     String temp;
     RecyclerView rv;
-    ArrayList<Message> messages = new ArrayList<>();
+    ArrayList<Message> messages = new ArrayList<Message>();
     MessageAdapter adapter;
     RightMessageAdapter Radapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_message);
+
+        gesterObject = new GestureDetectorCompat(this, new MessageMainActivity.LearnGesture());
 
         editText = findViewById(R.id.etTypeMessage);
 
@@ -80,6 +87,30 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.gesterObject.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class LearnGesture extends GestureDetector.SimpleOnGestureListener{
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            if (e2.getX() > e1.getX()){
+
+                startActivity(new Intent(MessageMainActivity.this, MainActivity.class));
+                finish();
+
+            }
+
+
+
+            return true;
+        }
     }
 
     @Override
@@ -274,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
 
         Context context;
         TextView mMsg;
-        ArrayList<Message> messages = new ArrayList<>();
+        ArrayList<Message> messages = new ArrayList<Message>();
 
         public MessageAdapter(Context context, ArrayList<Message> messages) {
             this.context = context;
@@ -323,7 +354,7 @@ public class MainActivity extends AppCompatActivity {
     public class RightMessageAdapter extends RecyclerView.Adapter<RightMessageAdapter.RightMessageHolder> {
 
         Context context;
-        ArrayList<Message> messages = new ArrayList<>();
+        ArrayList<Message> messages = new ArrayList<Message>();
 
         public RightMessageAdapter(Context context, ArrayList<Message> messages) {
             this.context = context;
