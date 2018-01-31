@@ -3,6 +3,8 @@ package com.vardaan.mk01;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.widget.EditText;
 
 import butterknife.Bind;
@@ -10,7 +12,6 @@ import butterknife.ButterKnife;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -28,6 +29,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.support.v4.view.GestureDetectorCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
     String mCreateDataExtraText = null;
 
     TextView setTextListen ;
-    TextView aisehi;
+
+    GestureDetectorCompat gesterObject;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gesterObject = new GestureDetectorCompat(this, new LearnGesture());
 
         ButterKnife.bind(this);
         textStatus = (TextView) findViewById(R.id.textViewStatus);
@@ -103,9 +108,6 @@ public class MainActivity extends AppCompatActivity {
             EditText e = (EditText) findViewById(R.id.editText);
             String s = e.getText().toString();
 
-
-
-
             perform( s );
 
         }
@@ -136,12 +138,43 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.gesterObject.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
 
+    class LearnGesture extends GestureDetector.SimpleOnGestureListener{
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            if (e2.getX() > e1.getX()){
+
+                startActivity(new Intent(MainActivity.this, VotingMainActivity.class));
+                finish();
+
+            }
+
+            else if (e2.getX() < e1.getX()){
+
+            }
+
+            return true;
+        }
+    }
 
     /* (non-Javadoc)
-     * @see android.app.Activity#onPause()
-     */
+         * @see android.app.Activity#onPause()
+         */
     @Override
     protected void onPause() {
 

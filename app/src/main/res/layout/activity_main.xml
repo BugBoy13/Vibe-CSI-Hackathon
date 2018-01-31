@@ -33,6 +33,7 @@
         app:cardCornerRadius="12dp">
 
         <TextView
+            android:textSize="24sp"
             android:padding="16dp"
             android:id="@+id/textViewMessage"
             android:layout_width="match_parent"
@@ -134,4 +135,5 @@
         </android.support.v7.widget.CardView>
 
     </GridLayout>
+
 </RelativeLayout>
